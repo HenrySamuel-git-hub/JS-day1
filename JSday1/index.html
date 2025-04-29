@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #color {
+                padding: 10px;
+                margin-bottom: 10px;
+                background-color: rgb(219, 225, 227);
+                border-radius: 5px;
+                width: 20%;
+                display: flex; 
+                justify-content: space-between;
+              }
+              #text{
+                border: none;
+                outline:0.5px solid;
+                padding: 10px;
+              }
+              #clickhere{
+                padding: 10px;
+                cursor: pointer;
+              }
+              #btn{
+                border: none;
+                border-radius: 1px;
+                background-color: rgb(219, 225, 227);
+              }
+              #edit{
+                border: none;
+                border-radius: 1px;
+                background-color: rgb(219, 225, 227);
+              }
+              #colorchange{
+                border: none;
+                background-color: lightgray;
+                padding: 10px;
+                border-radius: 5px;
+                cursor: pointer;
+            
+              }
+              #plus{
+                border: none;
+                border-radius: 2px;
+                padding: 3px;
+                width: 40px;
+                background-color: lightgray;
+                cursor: pointer; 
+              }
+              #minus{
+                border: none;
+                border-radius: 2px;
+                padding: 3px;
+                width: 40px;
+                background-color: lightgray;
+                cursor: pointer;
+              }
+              #numcount{
+                background-color:lightgray;
+                width: 40px;
+                display: inline;
+
+              }
+              #matter{
+                border: none;
+                background-color: lightgray;
+                padding: 10px;
+                border-radius: 5px;
+                cursor: pointer;
+              }
+        </style>
+    </head>
+    <body>
+
+<center>
+    <h2>CHANGE BACKGROUND COLOR</h2>
+    <button id="colorchange">click here to change the color</button>
+    <br><br>
+    <h2> Show/Hide Text</h2>
+    <button id="matter">click here to see the text</button>
+    <div id="addhere"></div>
+</center>
+<BR><br>
+    <h2>COUNTER APP</h2>
+    <button id="plus">➕</button>
+    <div id="numcount"></div>
+    <button id="minus">➖</button>
+    <br><br>
+<h2>Input & Display</h2>
+<input type="text" placeholder="Enter Somethin..." id="text">
+<button id="clickhere">click me</button>
+<br><br>
+<div id="texts"></div>
+<script>
+    const text=document.getElementById("text");
+    const clickhere=document.getElementById("clickhere")
+    const alltexts=JSON.parse(localStorage.getItem("textdata"))||[];
+    clickhere.addEventListener("click",()=>{
+      const textdata=text.value.trim()
+      if(textdata===""){
+        return alert("enter somethin...")
+      }
+      alltexts.push(textdata)
+      localStorage.setItem("textdata",JSON.stringify(alltexts))
+      displaytexts(alltexts);
+    });
+    function displaytexts(alltexts){
+      const texts=document.getElementById("texts");
+      texts.innerHTML=""
+      alltexts.forEach((x,i)=>{
+        const div=document.createElement("div");
+        div.id="color"
+        div.innerHTML=`
+        <span id="span">${i+1}.${x}</span>
+        <button id="btn">🗑️</button>
+        <button id="edit">✏️</button>`
+        texts.appendChild(div)
+      })
+    }
+    window.addEventListener("DOMContentLoaded",()=>{
+      displaytexts(alltexts);
+    })
+
+    //COLOR CHAMGE WHEN CLICKED - CHNAGE BACKGROUND COLOR
+    const colorchange=document.getElementById("colorchange");
+    let hexa="abcdef12345467890";
+    colorchange.addEventListener("click",()=>{
+      let hash="#";
+      for (let i=0;i<6;i++){
+        let color=Math.floor(Math.random()*hexa.length)
+        hash+=hexa[color];
+        document.getElementById("")
+      }
+      console.log(hash)
+      document.body.style.backgroundColor=hash;
+    })
+    //COUNT when plus and minus buttons clicked-counter app
+    let count = 0;
+    const plus=document.getElementById("plus");
+    const minus=document.getElementById("minus");
+    const numcount=document.getElementById("numcount");
+
+    plus.addEventListener("click",()=>{
+      count++;
+      numcount.innerText=count;
+    });
+    minus.addEventListener("click",()=>{
+      if(count>0){
+        count--;
+        numcount.innerText=count;
+      }
+    }); 
+    // . Show/Hide Text
+    
+    const matter=document.getElementById("matter");
+    matter.addEventListener("click",()=>{
+      if(addhere.innerHTML===""){
+        addhere.innerHTML=`
+        <h1>Hello There</h1>
+        <p>This is JS pratice doc1</p>`
+      }else if(addhere.innerHTML===`
+        <h1>Hello There</h1>
+        <p>This is JS pratice doc1</p>`){
+        addhere.innerText=""
+      }
+    }) 
+</script>
+    </body>
+</html>
